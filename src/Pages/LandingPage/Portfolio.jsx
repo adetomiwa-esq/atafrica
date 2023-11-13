@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { stocks } from '../../components/mockdata';
-import axios from 'axios';
+// import axios from 'axios';
 
 function Portfolio() {
 
-    const http = axios.create({
-        baseURL: 'https://atafrica.onrender.com/api/v1',
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Accept": "*/*",
-            "Content-Type": "application/json"
-        },
-        withCredentials: false
-    })
+    // const http = axios.create({
+    //     baseURL: 'https://atafrica.onrender.com/api/v1',
+    //     headers: {
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Accept": "*/*",
+    //         "Content-Type": "application/json"
+    //     },
+    //     withCredentials: false
+    // })
 
-    async function fetchStocks(){
-        http.get('/get_stocks')
-        .then(res => {
-            console.log(res)
-        }).catch(error => console.log(error))
-    }
+    // async function fetchStocks(){
+    //     http.get('/get_stocks')
+    //     .then(res => {
+    //         console.log(res)
+    //     }).catch(error => console.log(error))
+    // }
 
-    useEffect(() => {
-        fetchStocks()
-    }, [])
+    // useEffect(() => {
+    //     fetchStocks()
+    // }, [])
     
     const [riskScore, setRiskScore] = useState(0)
     const [displayScore, setDisplayScore] = useState(0)
@@ -32,8 +32,7 @@ function Portfolio() {
         setRiskScore(Math.floor(e.target.value))
     }
 
-    const ans = Object.entries(stocks[0]).find(x => x[0] === riskScore)
-    console.log(ans)
+    
     const bgColor = ['bg-transparent', 'bg-slate-500', 'bg-blue-200', 'bg-slate-300', 'bg-blue-200', 'bg-blue-600', 'bg-indigo-200', 'bg-indigo-400', 'bg-pink-200', 'bg-rose-200' ]
 
   return (
