@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
-import { stocks } from '../../components/mockdata';
-// import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+// import { stocks } from '../../components/mockdata';
+import axios from 'axios';
 
 function Portfolio() {
 
-    // const http = axios.create({
-    //     baseURL: 'https://atafrica.onrender.com/api/v1',
-    //     headers: {
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Accept": "*/*",
-    //         "Content-Type": "application/json"
-    //     },
-    //     withCredentials: false
-    // })
+    const [stocks, setStocks] = useState([])
 
-    // async function fetchStocks(){
-    //     http.get('/get_stocks')
-    //     .then(res => {
-    //         console.log(res)
-    //     }).catch(error => console.log(error))
-    // }
+    const http = axios.create({
+        baseURL: 'https://atafrica.onrender.com/api/v1',
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Accept": "*/*",
+            "Content-Type": "application/json"
+        },
+        withCredentials: false
+    })
 
-    // useEffect(() => {
-    //     fetchStocks()
-    // }, [])
+    async function fetchStocks(){
+        http.get('/get_stocks')
+        .then(res => {
+            const first = res.data.Stock.slice(0,2)
+            const second = res.data.Stock.slice(3)
+            const restructure = first.concat(second, res.data.Stock[2])
+            setStocks(restructure)
+
+
+        }).catch(error => console.log(error))
+    }
+
+    useEffect(() => {
+        fetchStocks()
+    }, [])
     
     const [riskScore, setRiskScore] = useState(0)
     const [displayScore, setDisplayScore] = useState(0)
