@@ -27,3 +27,22 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.spinner{
+  border: 10px solid whitesmoke;
+  border-top: 10px solid rgb(3, 3, 46);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}

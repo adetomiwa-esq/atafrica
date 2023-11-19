@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { stocks } from '../../components/mockdata';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 function Portfolio() {
 
@@ -16,12 +17,15 @@ function Portfolio() {
         withCredentials: false
     })
 
+    const [loading, setLoading] = useState(true)
+
     async function fetchStocks(){
         http.get('/get_stocks')
         .then(res => {
             const first = res.data.Stock.slice(0,2)
             const second = res.data.Stock.slice(3)
             const restructure = first.concat(second, res.data.Stock[2])
+            setLoading(false)
             setStocks(restructure)
 
 
@@ -67,6 +71,8 @@ function Portfolio() {
 
             <div className='text-white mt-8 flex flex-wrap'>
                 {
+                    loading ? <Spinner /> : 
+
                     stocks.map((stock, index) => {
                         const width = Object.entries(stock).find((x) => x[0] == riskScore)
                     
